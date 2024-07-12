@@ -1,0 +1,7 @@
+wandb:
+  project: quadruped
+  tags: null
+  group: null
+  resume: false
+  mode: online
+

@@ -1,0 +1,10 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.EvenMassDistribution
+violation_weight: 0.0
+penalty_weight: -0.1
+terminate_on_violation: false
+power: 2.0
+flying_penalty: 100.0
+
+violation_threshold: 0.1
+feet_sensor_indices: ???

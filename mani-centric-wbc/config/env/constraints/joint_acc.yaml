@@ -1,0 +1,8 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.JointAccelerationLimit
+violation_weight: 0.0
+penalty_weight: -2.5e-7
+terminate_on_violation: false
+
+violation_acc: 100.0
+penalty_scale: 0.0 # start penalizing at 0% of max joint acc

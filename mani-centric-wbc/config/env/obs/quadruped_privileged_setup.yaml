@@ -1,0 +1,57 @@
+_target_: collections.OrderedDict
+kp:
+  _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+  key: kp
+  dim: ${...controller.control_dim}
+  scale: 0.1
+  noise_std: null
+  clip: 100.0
+  offset: null
+kd:
+  _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+  key: kd
+  dim: ${...controller.control_dim}
+  scale: 10
+  noise_std: null
+  clip: 100.0
+  offset: null
+rigidbody_mass:
+  _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+  key: rigidbody_mass
+  dim: ${eval:"len(${...cfg.domain_rand.randomize_rigid_body_masses})"}
+  scale: 1.0
+  noise_std: null
+  clip: 100.0
+  offset: null
+rigidbody_com_offset:
+  _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+  key: rigidbody_com_offset
+  dim: ${eval:"len(${...cfg.domain_rand.randomize_rigid_body_com})*3"}
+  scale: 10.0
+  noise_std: null
+  clip: 100.0
+  offset: null
+rigidbody_restitution_coef:
+  _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+  key: rigidbody_restitution_coef
+  dim: ${eval:"len(${...cfg.domain_rand.randomize_restitution_rigid_bodies})"}
+  scale: 5.0
+  noise_std: null
+  clip: 100.0
+  offset: null
+dof_friction:
+  _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+  key: dof_friction
+  dim: ${eval:"len(${...controller.offset.data})"}
+  scale: 10.0
+  noise_std: null
+  clip: 100.0
+  offset: null
+dof_damping:
+  _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+  key: dof_damping
+  dim: ${eval:"len(${...controller.offset.data})"}
+  scale: 1.0
+  noise_std: null
+  clip: 100.0
+  offset: null

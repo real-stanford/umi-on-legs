@@ -1,0 +1,30 @@
+defaults:
+  - train
+  - _self_
+
+ckpt_path: ???
+
+offset:
+  _target_: numpy.array
+  object:
+    - 1.2
+    - 0.6
+    - 0.6
+env:
+  headless: false
+  cfg:
+    env:
+      num_envs: 1
+    terrain:
+      num_rows: 1
+      num_cols: 1
+      curriculum: false
+    noise:
+      add_noise: false
+    domain_rand:
+      randomize_friction: false
+      push_robots: false
+runner:
+  train_cfg:
+    runner:
+      resume: true

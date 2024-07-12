@@ -1,0 +1,9 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.Collision
+violation_weight: 0.0
+penalty_weight: -1.0
+terminate_on_violation: false
+
+violation_force_norm: 1.0
+penalty_scale: 0.1 # start penalizing at 10% of max joint acc
+link_names: ???

@@ -1,0 +1,7 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.RootHeight
+violation_weight: 0.0
+penalty_weight: -0.5
+terminate_on_violation: false
+
+target_height: 0.35

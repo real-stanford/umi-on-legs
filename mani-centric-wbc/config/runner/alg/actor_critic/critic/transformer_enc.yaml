@@ -1,0 +1,19 @@
+_target_: torch.nn.Sequential
+_args_:
+  - _target_: legged_gym.rsl_rl.modules.obs_encoder.TransformerHistoryEncoder
+    obs_dim: ${env.cfg.env.num_privileged_observations}
+    history_len: ${env.obs_history_len}
+    hidden_dim: 128
+    num_layers: 3
+    dim_feedforward: 128
+    n_head: 4
+    use_positional_encoding: false
+    output_latent_dim: 32
+    concat_most_recent_obs: true
+  - _target_: torch.nn.Linear
+    in_features: 32
+    out_features: 32
+  - _target_: torch.nn.ELU
+  - _target_: torch.nn.Linear
+    in_features: 32
+    out_features: 1

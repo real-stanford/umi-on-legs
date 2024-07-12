@@ -1,0 +1,8 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.EvenLegUsage
+violation_weight: 0.0
+penalty_weight: -1e-8
+terminate_on_violation: false
+leg_joint_sets: ???
+smoothing_dt_multiplier: -1.0
+power: 2.0

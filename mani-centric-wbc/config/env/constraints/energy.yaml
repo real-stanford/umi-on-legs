@@ -1,0 +1,6 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.EnergyUsage
+violation_weight: 0.0
+penalty_weight: -1e-7
+terminate_on_violation: false
+power: 2

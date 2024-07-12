@@ -1,0 +1,10 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.TorqueLimit
+violation_weight: 0.0
+penalty_weight: -0.0002
+terminate_on_violation: false
+
+violation_torque: 50.0
+penalty_scale: 0.0 # start penalizing at 0% of max torque
+power: 2.0
+joint_names: null

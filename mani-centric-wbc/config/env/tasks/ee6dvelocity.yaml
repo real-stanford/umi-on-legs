@@ -1,0 +1,5 @@
+defaults:
+  - locomotion6d
+  - _self_
+
+target_link_name: end_effector

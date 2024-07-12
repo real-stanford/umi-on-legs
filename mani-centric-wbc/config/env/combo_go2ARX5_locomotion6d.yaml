@@ -1,0 +1,27 @@
+defaults:
+  - env_go2ARX5
+  - default_constraints
+  - tasks@tasks.locomotion: locomotion6d
+  - _self_
+
+cfg:
+  env:
+    num_observations: 67
+    num_privileged_obs: 110
+tasks:
+  locomotion:
+    feet_sensor_indices:
+      - 0
+      - 1
+      - 2
+      - 3
+    z_height_range:
+      - 0.1
+      - 0.4
+constraints:
+  action_rate:
+    penalty_weight: -0.02
+  feet_drag:
+    penalty_weight: -0.01
+  energy:
+    penalty_weight: -1e-6

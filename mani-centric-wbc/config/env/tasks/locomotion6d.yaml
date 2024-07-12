@@ -1,0 +1,18 @@
+defaults:
+  - local_2d_vel
+  - _self_
+
+_target_: legged_gym.env.isaacgym.task.Link6DVelocity
+z_height_range:
+  - 0.1
+  - 0.4
+z_height_sigma: 0.01
+z_height_reward_scale: 0.5
+roll_range:
+  - -0.3
+  - 0.3
+pitch_range:
+  - -0.3
+  - 0.3
+gravity_sigma: 0.05
+gravity_reward_scale: 0.5

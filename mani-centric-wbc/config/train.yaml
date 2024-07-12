@@ -1,0 +1,26 @@
+defaults:
+  - common
+  - wandb
+  - env: combo_go2ARX5_pickle_reaching_extreme
+  - runner: on_policy_runner
+  - _self_
+
+runner:
+  max_iterations:  ${eval:"1000 if 'locomotion' in ${env.tasks} else 20000"} # locomotion converges faster
+  device: ${env.sim_device}
+  alg:
+    gamma: 0.99
+    entropy_coef: 0.01
+    actor_critic:
+      init_noise_std: 1.0
+      num_actor_obs: ${eval:"int(${env.cfg.env.num_observations})*int(${env.obs_history_len})"}
+      num_critic_obs: ${env.cfg.env.num_privileged_obs}
+      num_actions: ${env.cfg.env.num_actions}
+env:
+  seed: ${seed}
+  vis_resolution: ${runner.vis_resolution}
+  cfg:
+    env:
+      send_timeouts: true # otherwise, would greatly blow up policy value
+ckpt_path: null
+use_noise: True

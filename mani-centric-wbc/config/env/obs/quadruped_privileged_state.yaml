@@ -1,0 +1,43 @@
+# like state obs, but noiseless
+_target_: collections.OrderedDict
+_convert_: all
+root_lin_vel:
+  _target_: legged_gym.env.isaacgym.obs.EnvObservationAttribute
+  key: local_root_lin_vel
+  dim: 3
+  scale: 2.0
+  noise_std: null
+  clip: 100.0
+  offset: null
+root_ang_vel:
+  _target_: legged_gym.env.isaacgym.obs.EnvObservationAttribute
+  key: local_root_ang_vel
+  dim: 3
+  scale: 0.25
+  noise_std: null
+  clip: 100.0
+  offset: null
+local_root_gravity:
+  _target_: legged_gym.env.isaacgym.obs.EnvObservationAttribute
+  key: local_root_gravity
+  dim: 3
+  scale: null
+  noise_std: null
+  clip: 100.0
+  offset: null
+dof_pos:
+  _target_: legged_gym.env.isaacgym.obs.EnvObservationAttribute
+  key: dof_pos
+  dim: ${...cfg.env.num_actions}
+  scale: 1.0
+  noise_std: null
+  clip: 100.0
+  offset: ${...controller.offset}
+dof_vel:
+  _target_: legged_gym.env.isaacgym.obs.EnvObservationAttribute
+  key: dof_vel
+  dim: ${...cfg.env.num_actions}
+  scale: 0.05
+  noise_std: null
+  clip: 100.0
+  offset: null

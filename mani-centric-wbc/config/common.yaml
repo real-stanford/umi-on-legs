@@ -1,0 +1,3 @@
+seed: 0
+defaults:
+  - override hydra/job_logging: custom

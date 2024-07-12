@@ -1,0 +1,10 @@
+cfg:
+  domain_rand:
+    randomize_rigid_body_masses: []
+    randomize_rigid_body_com: []
+    randomize_friction: false
+    randomize_pd_params: false
+    randomize_dof_damping: false
+    randomize_dof_friction: false
+    randomize_dof_velocity: false
+    push_robots: false

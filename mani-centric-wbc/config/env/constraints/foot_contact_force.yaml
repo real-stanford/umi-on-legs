@@ -1,0 +1,10 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.FootGroundContact
+violation_weight: -1.0
+penalty_weight: -0.1
+terminate_on_violation: false
+power: 1.0
+
+penalty_foot_force: ${eval:"${.violation_foot_force}*0.75"}
+violation_foot_force: ???
+feet_sensor_indices: ???

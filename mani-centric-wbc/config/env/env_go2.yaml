@@ -1,0 +1,196 @@
+defaults:
+  - env_base
+  - obs@state_obs: quadruped_state
+  - obs@privileged_state_obs: quadruped_privileged_state
+  - obs@privileged_setup_obs: quadruped_privileged_setup
+  - _self_
+
+constraints:
+  feet_drag:
+    feet_rigid_body_indices:
+      - 4
+      - 8
+      - 14
+      - 18 
+  torque:
+    violation_torque: 5.0
+  collision:
+    #
+    link_names:
+      - FR_hip
+      - FR_thigh
+      - FR_calf
+      #
+      - FL_hip
+      - FL_thigh
+      - FL_calf
+      #
+      - RR_hip
+      - RR_thigh
+      - RR_calf
+      #
+      - RL_hip
+      - RL_thigh
+      - RL_calf
+  joint_limit:
+    joint_names:
+      - FL_hip_joint
+      - FL_thigh_joint
+      - FL_calf_joint
+      #
+      - FR_hip_joint
+      - FR_thigh_joint
+      - FR_calf_joint
+      #
+      - RL_hip_joint
+      - RL_thigh_joint
+      - RL_calf_joint
+      #
+      - RR_hip_joint
+      - RR_thigh_joint
+      - RR_calf_joint
+    lower:
+      data:
+        # Front Right
+        - -1.0472 # hip
+        - -1.5708 # thigh
+        - -2.7227 # calf
+        # Front Left
+        - -1.0472 # hip
+        - -1.5708 # thigh
+        - -2.7227 # calf
+        # Back Right
+        - -1.0472 # hip
+        - -0.5236 # thigh
+        - -2.7227 # calf
+        # Back Left
+        - -1.0472 # hip
+        - -0.5236 # thigh
+        - -2.7227 # calf
+    upper:
+      data:
+        # Front Right
+        - 1.0472 # hip
+        - 3.4907 # thigh
+        - -0.83776 # calf
+        # Front Left
+        - 1.0472 # hip
+        - 3.4907 # thigh
+        - -0.83776 # calf
+        # Back Right
+        - 1.0472 # hip
+        - 4.5379 # thigh
+        - -0.83776 # calf
+        # Back Left
+        - 1.0472 # hip
+        - 4.5379 # thigh
+        - -0.83776 # calf
+controller:
+  scale:
+    data:
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+  kp:
+    data:
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+      - 30.0
+  kd:
+    data:
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 1.0
+  torque_limit:
+    data:
+      - 23.7
+      - 23.7
+      - 35.55
+      - 23.7
+      - 23.7
+      - 35.55
+      - 23.7
+      - 23.7
+      - 35.55
+      - 23.7
+      - 23.7
+      - 35.55
+  offset:
+    data:
+      # Front Right
+      - 0.1 # hip
+      - 0.8 # thigh
+      - -1.5 # calf
+      # Front Left
+      - -0.1 # hip
+      - 0.8 # thigh
+      - -1.5 # calf
+      # Back Right
+      - 0.1 # hip
+      - 1.0 # thigh
+      - -1.5 # calf
+      # Back Left
+      - -0.1 # hip
+      - 1.0 # thigh
+      - -1.5 # calf
+
+cfg:
+  env:
+    num_observations: ???
+    num_actions: 12
+
+  init_state:
+    pos:
+      - 0.0
+      - 0.0
+      - 0.30
+
+  asset:
+    file: "{LEGGED_GYM_ROOT_DIR}/resources/robots/go2_description/urdf/go2_description.urdf"
+    name: "go2"
+    terminate_after_contacts_on:
+      - "base"
+      - "Head"
+      - "hip"
+    self_collisions: 0
+    collapse_fixed_joints: true
+    flip_visual_attachments: true
+    force_sensor_links:
+      - FR_foot
+      - FL_foot
+      - RR_foot
+      - RL_foot
+
+  domain_rand:
+    randomize_rigid_body_masses:
+      - base
+    added_mass_range:
+      - -2.0
+      - 2.0

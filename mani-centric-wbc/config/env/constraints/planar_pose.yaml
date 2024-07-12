@@ -1,0 +1,15 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.PlanarPose
+violation_weight: 0.0
+penalty_weight: -0.5
+terminate_on_violation: false
+
+target_x: null
+target_y: null
+target_theta: null
+pos_err_scale: 0.5
+theta_err_scale: 0.5
+forward_vec:
+ - 1.0
+ - 0.0
+ - 0.0

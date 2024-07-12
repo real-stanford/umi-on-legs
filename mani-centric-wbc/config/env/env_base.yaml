@@ -1,0 +1,275 @@
+defaults:
+  - cfg/rewards: default
+
+headless: true
+seed: ???
+sim_device: ???
+vis_resolution: ???
+graphics_device_id: null # same as sim device
+_target_: legged_gym.env.isaacgym.env.IsaacGymEnv
+dof_pos_reset_range_scale: 0.05 # 0.2 large
+env_spacing: 3.
+attach_camera: true
+dense_rewards: false
+ctrl_buf_len: ${.controller.decimation_count}
+ctrl_delay: null
+max_action_value: 100.0
+obs_history_len: 1
+tasks:
+  _target_: collections.OrderedDict
+controller:
+  _target_: legged_gym.env.isaacgym.control.PositionController
+  _convert_: all
+  seed: ${seed}
+  control_dim: ${..cfg.env.num_actions}
+  device: ${..sim_device}
+  decimation_count: 4
+  num_envs: ${..cfg.env.num_envs}
+  offset:
+    _target_: torch.tensor
+    data: ???
+    device: ${...sim_device}
+  torque_limit:
+    _target_: torch.tensor
+    device: ${...sim_device}
+    data: ???
+  scale:
+    _target_: torch.tensor
+    device: ${...sim_device}
+  kp:
+    _target_: torch.tensor
+    device: ${...sim_device}
+  kd:
+    _target_: torch.tensor
+    device: ${...sim_device}
+
+state_obs: ???
+setup_obs:
+  _target_: collections.OrderedDict
+privileged_state_obs: ???
+privileged_setup_obs: ???
+
+constraints:
+  _target_: collections.OrderedDict
+  _convert_: all
+
+cfg:
+  env:
+    num_observations: ${eval:"sum(int(v['dim']) for v in ${env.state_obs}.values() if 'dim' in v) + sum([int(v['dim']) for v in ${env.setup_obs}.values() if 'dim' in v]) + sum(int(v['obs_dim']) for v in ${env.tasks}.values() if 'obs_dim' in v) + ${env.controller.control_dim}"}
+    num_privileged_obs: ???
+    num_actions: ???
+    num_envs: 4096
+    episode_length_s: 10.0
+    send_timeouts: true
+
+  terrain:
+    _convert_: all
+    # common params
+    static_friction: 1.0
+    dynamic_friction: 1.0
+    restitution: 0.0
+    # mode
+    mode: "plane" # "plane" or "perlin"
+    tot_cols: 2000
+    tot_rows: 2000
+    zScale: 0.15
+    horizontal_scale: 0.05 # m
+    vertical_scale: 0.00001 # m
+    slope_threshold: 100000000
+    safety_margin: 10.0
+    #
+    transform_x: ${eval:'-${.tot_cols} * ${.horizontal_scale} / 2.0'}
+    transform_y: ${eval:'-${.tot_rows} * ${.horizontal_scale} / 2.0'}
+    transform_z: 0.0
+
+    measured_points_x:
+      - -0.4
+      - -0.3
+      - -0.2
+      - -0.1
+      - 0.0
+      - 0.1
+      - 0.2
+      - 0.3
+      - 0.4
+    measured_points_y:
+      - -0.4
+      - -0.3
+      - -0.2
+      - -0.1
+      - 0.0
+      - 0.1
+      - 0.2
+      - 0.3
+      - 0.4
+    border_size: 0.0
+
+  init_state:
+    pos: ???
+    rot:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+    lin_vel:
+      - 0.0
+      - 0.0
+      - 0.0
+    ang_vel:
+      - 0.0
+      - 0.0
+      - 0.0
+    pos_noise:
+      - 0.0
+      - 0.0
+      - 0.0
+    euler_noise:
+      - 0.0
+      - 0.0
+      - 0.0
+    lin_vel_noise:
+      - 0.0
+      - 0.0
+      - 0.0
+    ang_vel_noise:
+      - 0.0
+      - 0.0
+      - 0.0
+
+  asset:
+    file: ???
+    name: ???
+    terminate_after_contacts_on: ???
+    force_sensor_links: []
+    self_collisions: 0
+    collapse_fixed_joints: false
+
+    disable_gravity: false
+    fix_base_link: false
+    default_dof_drive_mode: 3
+    replace_cylinder_with_capsule: true
+    flip_visual_attachments: true
+    density: 0.001
+    angular_damping: 0.0
+    linear_damping: 0.0
+    max_angular_velocity: 1000.0
+    max_linear_velocity: 1000.0
+    armature: 0.0
+    thickness: 0.01
+
+  domain_rand:
+    # friction
+    friction_range:
+      - 0.2
+      - 2.0
+    randomize_friction: true
+    num_friction_buckets: 64
+    # mass
+    randomize_rigid_body_masses:
+      - base
+    added_mass_range:
+      - -0.5
+      - 0.5
+    # inertia
+    randomize_rigid_body_com:
+      - base
+    rigid_body_com_range:
+      _target_: torch.tensor
+      device: ${....sim_device}
+      data:
+        - - -0.1
+          - -0.1
+          - -0.1
+        - - 0.1
+          - 0.1
+          - 0.1
+    # transport robots, simulates pose estimation
+    # that occasionally jumps
+    transport_robots: false
+    transport_interval_s: 4.0
+    transport_pos_noise_std:
+      _target_: torch.tensor
+      device: ${....sim_device}
+      data:
+        - 0.1
+        - 0.1
+        - 0.0
+    transport_euler_noise_std:
+      _target_: torch.tensor
+      device: ${....sim_device}
+      data:
+        - 0.01
+        - 0.01
+        - 0.5
+    # pushing
+    push_robots: true
+    push_interval_s: 5.0
+    max_push_vel:
+      _target_: torch.tensor
+      data:
+        - 1.0
+        - 1.0
+        - 0.0
+        - 1.0
+        - 1.0
+        - 1.0
+      device: ${....sim_device}
+    # pid params
+    randomize_pd_params: true
+    kp_ratio_range:
+      - 0.5
+      - 1.5
+    kd_ratio_range:
+      - 0.5
+      - 1.5
+    # dof params
+    randomize_dof_damping: false
+    dof_damping_range:
+      - 0.0
+      - 4.0
+    randomize_dof_friction: false
+    dof_friction_range:
+      - 0.0
+      - 0.5
+    randomize_dof_velocity: false
+    dof_velocity_range:
+      - 5.0
+      - 20.0
+    restitution_coef_range:
+       - 0.0
+       - 1.0
+    randomize_restitution_rigid_bodies: []
+
+  viewer:
+    ref_env: 0
+    pos:
+      - 1
+      - 1
+      - 1
+    lookat:
+      - 0.0
+      - 0.0
+      - 0.0
+
+  sim:
+    dt: 0.005
+    substeps: 1
+    gravity:
+      - 0.0
+      - 0.0
+      - -9.81
+    up_axis: 1
+    use_gpu_pipeline: true
+    physx:
+      num_threads: 10
+      solver_type: 1
+      num_position_iterations: 4
+      num_velocity_iterations: 0
+      friction_offset_threshold: 0.04
+      contact_offset: 0.01
+      rest_offset: 0.0
+      bounce_threshold_velocity: 0.5
+      max_depenetration_velocity: 1.0
+      max_gpu_contact_pairs: 2097152
+      default_buffer_size_multiplier: 3
+      contact_collection: 2

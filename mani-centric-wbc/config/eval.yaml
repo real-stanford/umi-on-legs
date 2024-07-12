@@ -1,0 +1,91 @@
+defaults:
+  - train
+  - env/constraints@env.constraints.energy: energy
+  - _self_
+runner:
+  num_eval_episode_per_env: 2
+env:  
+  dense_rewards: true
+  constraints:
+    energy:
+      skip_stats: false
+      torque_constant:
+        _target_: torch.tensor
+        device: ${env.sim_device}
+        data:
+          # legs, from https://shop.unitree.com/products/go1-motor
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          - 0.63895
+          # arm, from manufacturer
+          - 1.4
+          - 1.4
+          - 1.4
+          - 0.424
+          - 0.424
+          - 0.424
+      voltage:
+        _target_: torch.tensor
+        device: ${env.sim_device}
+        data:
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+          - 30.0
+  tasks:
+    reaching:
+      sequence_sampler:
+        add_random_height_range: null
+  cfg:
+    env:
+      num_envs: 250
+      
+
+    asset:
+      terminate_after_contacts_on:
+        - base
+        - hip
+        - Head
+        - thigh
+        - base_arm_link
+        - link1
+        - link2
+        - link3
+        - link4
+        - link5
+    init_state:
+      pos:  
+        - -0.5
+        - 0.0
+        - 0.3
+      pos_noise:
+        - 0.05
+        - 0.05
+        - 0.001
+      euler_noise:
+        - 0.01
+        - 0.01
+        - 0.1

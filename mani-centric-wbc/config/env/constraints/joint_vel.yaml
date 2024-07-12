@@ -1,0 +1,9 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.JointVelocity
+violation_weight: 0.0
+penalty_weight: -2.5e-7
+terminate_on_violation: false
+
+violation_vel: 20.0
+penalty_scale: 0.0
+power: 2

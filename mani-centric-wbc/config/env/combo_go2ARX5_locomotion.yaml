@@ -1,0 +1,15 @@
+defaults:
+  - env_go2ARX5
+  - tasks@tasks.locomotion: local_2d_vel
+  - _self_
+
+cfg:
+  env:
+    num_observations: 66
+tasks:
+  locomotion:
+    feet_sensor_indices:
+      - 0
+      - 1
+      - 2
+      - 3

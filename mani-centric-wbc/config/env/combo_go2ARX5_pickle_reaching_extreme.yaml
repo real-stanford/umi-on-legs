@@ -1,0 +1,67 @@
+defaults:
+  - combo_go2ARX5_pickle_reaching
+  - _self_
+cfg:
+  init_state:
+    pos_noise:
+      - 0.1
+      - 0.1
+      - 0.0
+    euler_noise:
+      - 0.05
+      - 0.05
+      - 0.5
+  env:
+    num_privileged_obs: ${eval:"189 + len(${env.tasks.reaching.target_obs_times})*9"}
+  domain_rand:
+    transport_robots: true
+    transport_interval_s: 4.0
+    transport_pos_noise_std:
+      _target_: torch.tensor
+      device: ${....sim_device}
+      data:
+        - 0.1
+        - 0.1
+        - 0.01
+    transport_euler_noise_std:
+      _target_: torch.tensor
+      device: ${....sim_device}
+      data:
+        - 0.01
+        - 0.01
+        - 0.5
+    randomize_dof_damping: true
+    dof_damping_range:
+      - 0.01
+      - 0.5
+    randomize_dof_friction: true
+    dof_friction_range:
+      - 0.0
+      - 0.05
+    friction_range:
+      - 0.1
+      - 8.0
+    added_mass_range:
+      - -0.25
+      - 0.25
+    base_com_range:
+      data:
+        - - -0.1
+          - -0.1
+          - -0.1
+        - - 0.1
+          - 0.1
+          - 0.1
+    randomize_rigid_body_masses:
+      - base
+      - link1
+      - link3
+      - link5
+      - link6
+    randomize_rigid_body_com:
+      - base
+      - link1
+      - link3
+      - link5
+      - link6
+    randomize_restitution_rigid_bodies: []

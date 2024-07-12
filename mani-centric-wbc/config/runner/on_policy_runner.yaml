@@ -1,0 +1,17 @@
+defaults:
+  - alg: ppo
+  - _self_
+_target_: legged_gym.rsl_rl.runners.on_policy_runner.OnPolicyRunner
+ckpt_dir: ???
+device: ???
+init_at_random_ep_len: true
+num_transitions_per_env: 24
+ckpt_save_interval: 500
+max_iterations: 10000
+num_eval_episode_per_env: 1
+eval_freq: 500
+vis_steps: 500
+vis_freq: 10000
+vis_resolution:
+  - 144
+  - 256

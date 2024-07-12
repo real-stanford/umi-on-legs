@@ -1,0 +1,8 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.ActionRateLimit
+violation_weight: 0.0
+penalty_weight: -0.03
+terminate_on_violation: false
+
+violation_action_rate: 1.2 # got this value from aliengo experiments
+power: 2.0

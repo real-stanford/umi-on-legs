@@ -1,0 +1,210 @@
+defaults:
+  - env_go2ARX5
+  - tasks@tasks.reaching: world_pos_reaching
+  - constraints@constraints.action_rate: action_rate
+  - constraints@constraints.joint_acc: joint_acc
+  - constraints@constraints.collision: collision
+  # - constraints@constraints.feet_drag: feet_drag
+  - constraints@constraints.joint_limit: joint_limit
+  - constraints@constraints.torque: torque
+  # - constraints@constraints.energy: energy
+  - constraints@constraints.even_mass_distribution: even_mass_distribution
+  # - constraints@constraints.arm_action_rate: action_rate
+  # - constraints@constraints.keep_ee_close: keep_links_close
+  - constraints@constraints.fr_feet_under_hips: keep_links_close
+  - constraints@constraints.fl_feet_under_hips: keep_links_close
+  - constraints@constraints.rr_feet_under_hips: keep_links_close
+  - constraints@constraints.rl_feet_under_hips: keep_links_close
+  # - constraints@constraints.foot_contact_force: foot_contact_force
+  - constraints@constraints.aligned_body_ee: close_to_default
+  # - constraints@constraints.arm_base_action_rate: action_rate
+  - constraints@constraints.root_height: root_height
+  # - constraints@constraints.point_body_at_gripper: point_body_at_gripper
+  # - constraints@constraints.calves_torque: torque
+  - _self_
+  # - no_rand
+
+tasks:
+  reaching:
+    link_name: end_effector
+    sequence_sampler:
+      episode_length_s: ${....cfg.env.episode_length_s}
+      dt: ${....cfg.sim.dt}
+      device: ${....sim_device}
+constraints:
+  calves_torque:
+    violation_torque: 40.0
+    joint_names:
+      - FR_calf_joint
+      - FL_calf_joint
+      - RR_calf_joint
+      - RL_calf_joint
+    penalty_weight: -1e-3
+  point_body_at_gripper:
+    gripper_link_name: end_effector
+  even_mass_distribution:
+    penalty_weight: -1.0
+    feet_sensor_indices:
+      - 0
+      - 1
+      - 2
+      - 3
+  aligned_body_ee:
+    penalty_weight: -1.0
+    default_config:
+      _target_: torch.tensor
+      data:
+        - 0.0
+        - 0.0
+      device: ${....sim_device}
+    joint_names:
+      - joint1
+      - joint5
+  root_height:
+    target_height: 0.35
+  foot_contact_force:
+    feet_sensor_indices:
+      - 0
+      - 1
+      - 2
+      - 3
+    violation_foot_force: 20.0
+  torque:
+    violation_torque: 40.0
+    penalty_weight: -1e-4
+    power: 2
+  keep_ee_close:
+    link_1: end_effector
+    link_2: link1 # NOTE link 1 is fine because it's at the base of the arm
+    target_distance: 0.70
+    planar: true
+    penalty_weight: -0.5
+    violation_weight: -1.0
+    terminate_on_violation: false
+    mode: max
+  fr_feet_under_hips:
+    link_1: FR_thigh
+    link_2: FR_foot
+    planar: true
+    penalty_weight: -1.0
+    distance_sigma: 0.5
+  fl_feet_under_hips:
+    link_1: FL_thigh
+    link_2: FL_foot
+    planar: true
+    penalty_weight: ${env.constraints.fr_feet_under_hips.penalty_weight}
+    distance_sigma: ${env.constraints.fr_feet_under_hips.distance_sigma}
+  rr_feet_under_hips:
+    link_1: RR_thigh
+    link_2: RR_foot
+    planar: true
+    penalty_weight: ${env.constraints.fr_feet_under_hips.penalty_weight}
+    distance_sigma: ${env.constraints.fr_feet_under_hips.distance_sigma}
+  rl_feet_under_hips:
+    link_1: RL_thigh
+    link_2: RL_foot
+    planar: true
+    penalty_weight: ${env.constraints.fr_feet_under_hips.penalty_weight}
+    distance_sigma: ${env.constraints.fr_feet_under_hips.distance_sigma}
+  action_rate:
+    penalty_weight: -5e-2
+  arm_action_rate:
+    violation_weight: 0.0
+    penalty_weight: -0.02
+    terminate_on_violation: false
+    joint_names:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
+  arm_base_action_rate:
+    violation_weight: 0.0
+    penalty_weight: -0.1
+    terminate_on_violation: false
+    joint_names:
+      - joint1
+  even_leg_usage:
+    leg_joint_sets:
+      FR:
+        - FR_hip_joint
+        - FR_thigh_joint
+        - FR_calf_joint
+      FL:
+        - FL_hip_joint
+        - FL_thigh_joint
+        - FL_calf_joint
+      RR:
+        - RR_hip_joint
+        - RR_thigh_joint
+        - RR_calf_joint
+      RL:
+        - RL_hip_joint
+        - RL_thigh_joint
+        - RL_calf_joint
+cfg:
+  env:
+    num_actions: 18
+    num_observations:  ${eval:"60 + len(${env.tasks.reaching.target_obs_times})*9"}
+    num_privileged_obs: 143
+    episode_length_s: 7.0
+  rewards:
+    scales:
+      orientation: -1.0
+  asset:
+    terminate_after_contacts_on:
+      - base
+      - hip
+      - Head
+      - thigh
+      - base_arm_link
+      - link1
+      - link2
+      - link3
+      - link4
+      - link5
+  sim:
+    substeps: 1
+    physx:
+      max_gpu_contact_pairs: 16777216
+      default_buffer_size_multiplier: 4
+      num_position_iterations: 4
+      num_velocity_iterations: 0
+      contact_collection: 1
+privileged_setup_obs:
+  rigid_shape_friction:
+    _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+    key: rigid_shape_friction
+    dim: 34
+    scale: 1.0
+    noise_std: null
+    clip: 100.0
+    offset: null
+controller:
+  offset:
+    _target_: torch.tensor
+    data:
+      # Front Right
+      - 0.1 # hip
+      - 0.8 # thigh
+      - -1.5 # calf
+      # Front Left
+      - -0.1 # hip
+      - 0.8 # thigh
+      - -1.5 # calf
+      # Back Right
+      - 0.1 # hip
+      - 1.0 # thigh
+      - -1.5 # calf
+      # Back Left
+      - -0.1 # hip
+      - 1.0 # thigh
+      - -1.5 # calf
+      # Arm
+      - 0.0
+      - 0.3
+      - 0.5
+      - 0.0
+      - 0.0
+      - 0.0

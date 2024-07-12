@@ -1,0 +1,17 @@
+_target_: torch.nn.Sequential
+_args_:
+  - _target_: torch.nn.Linear
+    in_features: ${....num_critic_obs}
+    out_features: 128
+  - _target_: torch.nn.ELU
+  - _target_: torch.nn.Linear
+    in_features: 128
+    out_features: 64
+  - _target_: torch.nn.ELU
+  - _target_: torch.nn.Linear
+    in_features: 64
+    out_features: 32
+  - _target_: torch.nn.ELU
+  - _target_: torch.nn.Linear
+    in_features: 32
+    out_features: 1

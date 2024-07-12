@@ -1,0 +1,7 @@
+scales:
+  # not used
+  orientation: 0.0
+  # used
+  # lin_vel_z: -2.0
+  # ang_vel_xy: -0.05
+only_positive_rewards: true

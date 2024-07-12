@@ -1,0 +1,12 @@
+defaults:
+ - constraints@constraints.action_rate: action_rate
+ - constraints@constraints.collision: collision
+ - constraints@constraints.feet_drag: feet_drag
+ - constraints@constraints.joint_limit: joint_limit
+#  - constraints@constraints.close_to_default: close_to_default
+#  - constraints@constraints.root_height: root_height
+#  - constraints@constraints.planar_pose: planar_pose
+ - constraints@constraints.energy: energy
+#  - constraints@constraints.even_leg_usage: even_leg_usage
+#  - constraints@constraints.keep_feet_still: keep_feet_still
+ - _self_

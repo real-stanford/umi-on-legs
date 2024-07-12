@@ -1,0 +1,34 @@
+defaults:
+  - env_go2
+  - tasks@tasks.locomotion: locomotion6d
+  - constraints@constraints.action_rate: action_rate
+  - constraints@constraints.joint_acc: joint_acc
+  - constraints@constraints.collision: collision
+  # - constraints@constraints.feet_drag: feet_drag
+  - constraints@constraints.joint_limit: joint_limit
+  - constraints@constraints.torque: torque
+  # - constraints@constraints.energy: energy
+  # - constraints@constraints.foot_contact_force: foot_contact_force
+  - _self_
+
+cfg:
+  env:
+    num_observations: 49
+    num_privileged_obs: 104
+tasks:
+  locomotion:
+    feet_sensor_indices:
+      - 0
+      - 1
+      - 2
+      - 3
+    z_height_range:
+    - 0.1
+    - 0.4
+constraints:
+  action_rate:
+    penalty_weight: -0.02
+  feet_drag:
+    penalty_weight: -0.01
+  energy:
+    penalty_weight: -1e-6

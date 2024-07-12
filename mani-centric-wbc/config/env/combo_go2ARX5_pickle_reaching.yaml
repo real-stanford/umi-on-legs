@@ -1,0 +1,4 @@
+defaults:
+  - combo_go2ARX5_reaching
+  - tasks/sequence_sampler@tasks.reaching.sequence_sampler: pickle_pose_loader
+  - _self_

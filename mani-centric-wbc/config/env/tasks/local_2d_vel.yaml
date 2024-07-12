@@ -1,0 +1,28 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.task.Link2DVelocity
+lin_vel_obs_scale: 2.0
+ang_vel_obs_scale: 0.25
+resampling_time: 4.0
+min_target_lin_vel: 0.1
+lin_vel_range:
+  - - -1.0
+    - 1.0
+  - - -1.0
+    - 1.0
+  - - 0.0
+    - 0.0
+ang_vel_range:
+  - - 0.0
+    - 0.0
+  - - 0.0
+    - 0.0
+  - - -1.5
+    - 1.5
+tracking_sigma: 0.25
+lin_vel_reward_scale: 1.0
+ang_vel_reward_scale: 0.5
+feet_air_time_reward_scale: 1.0
+feet_sensor_indices: ???
+lin_vel_reward_power: 2.0
+ang_vel_reward_power: 2.0
+target_link_name: base

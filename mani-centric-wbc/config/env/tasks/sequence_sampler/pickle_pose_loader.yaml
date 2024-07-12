@@ -1,0 +1,7 @@
+_target_: legged_gym.env.isaacgym.pose_sequence.PicklePoseSequenceLoader
+episode_length_s: ???
+dt: ???
+device: cuda
+file_path: ???
+planar_center: true
+add_random_height_range: null

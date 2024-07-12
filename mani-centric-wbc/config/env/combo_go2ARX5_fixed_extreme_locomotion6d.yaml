@@ -1,0 +1,60 @@
+defaults:
+  - combo_go2ARX5_fixed_locomotion6d
+  - _self_
+cfg:
+  env:
+    num_privileged_obs: 196
+  domain_rand:
+    randomize_dof_damping: true
+    dof_damping_range:
+      - 0.5
+      - 1.5
+    randomize_dof_friction: true
+    dof_friction_range:
+      - 0.0
+      - 0.1
+    friction_range:
+      - 0.1
+      - 8.0
+    added_mass_range:
+      - -0.5
+      - 2.0
+    base_com_range:
+      data:
+        - - -0.2
+          - -0.2
+          - -0.2
+        - - 0.2
+          - 0.2
+          - 0.2
+    randomize_rigid_body_masses:
+      - base
+      - link1
+      - link3
+      - link5
+      - link6
+    randomize_rigid_body_com:
+      - base
+      - link1
+      - link3
+      - link5
+      - link6
+privileged_setup_obs:
+  rigid_shape_friction:
+    _target_: legged_gym.env.isaacgym.obs.EnvSetupAttribute
+    key: rigid_shape_friction
+    dim: 34
+    scale: 1.0
+    noise_std: null
+    clip: 100.0
+    offset: null
+constraints:
+  torque:
+    violation_torque: 40.0
+    penalty_weight: -1e-4
+    power: 2
+  action_rate:
+    penalty_weight: -5e-2
+  feet_drag:
+    penalty_weight: -0.1
+    penalty_feet_drag_height: 0.05

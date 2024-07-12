@@ -1,0 +1,11 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.FeetDragging
+violation_weight: 0.0
+penalty_weight: -0.1
+terminate_on_violation: false
+
+feet_rigid_body_indices: ???
+feet_drag_sigma: 0.05
+penalty_feet_drag_height: 0.1 # feet radii is 0.0265
+violation_feet_drag_height: 0.04
+violation_feet_drag_speed: 0.05

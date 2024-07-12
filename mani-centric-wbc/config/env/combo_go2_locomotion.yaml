@@ -1,0 +1,31 @@
+defaults:
+  - env_go2
+  - tasks@tasks.locomotion: local_2d_vel
+  - constraints@constraints.action_rate: action_rate
+  - constraints@constraints.joint_acc: joint_acc
+  - constraints@constraints.collision: collision
+  # - constraints@constraints.feet_drag: feet_drag
+  - constraints@constraints.joint_limit: joint_limit
+  - constraints@constraints.torque: torque
+  # - constraints@constraints.energy: energy
+  # - constraints@constraints.foot_contact_force: foot_contact_force
+  - _self_
+
+cfg:
+  env:
+    num_observations: 45
+    num_privileged_obs: 101
+  rewards:
+    scales:
+      # not used
+      orientation: 0.0
+      # used
+      lin_vel_z: -2.0
+      ang_vel_xy: -0.05
+tasks:
+  locomotion:
+    feet_sensor_indices:
+      - 0
+      - 1
+      - 2
+      - 3

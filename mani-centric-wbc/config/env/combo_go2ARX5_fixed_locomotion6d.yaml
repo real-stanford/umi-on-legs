@@ -1,0 +1,164 @@
+defaults:
+  - env_go2ARX5
+  - tasks@tasks.locomotion: locomotion6d
+  - constraints@constraints.action_rate: action_rate
+  - constraints@constraints.joint_acc: joint_acc
+  - constraints@constraints.collision: collision
+  # - constraints@constraints.feet_drag: feet_drag
+  - constraints@constraints.joint_limit: joint_limit
+  - constraints@constraints.torque: torque
+  # - constraints@constraints.energy: energy
+  # - constraints@constraints.foot_contact_force: foot_contact_force
+  - _self_
+
+ctrl_delay:
+  data:
+  # quadruped
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+   - 0.020
+controller:
+  _target_: legged_gym.env.isaacgym.control.PositionControllerWithExtraFixedAction
+  extra_action:
+    _target_: torch.full
+    size:
+      - 6
+    fill_value: 0.0
+    device: ${...sim_device}
+  control_dim: 18
+  offset:
+    data:
+      # Front Right
+      - 0.1 # hip
+      - 0.8 # thigh
+      - -1.5 # calf
+      # Front Left
+      - -0.1 # hip
+      - 0.8 # thigh
+      - -1.5 # calf
+      # Back Right
+      - 0.1 # hip
+      - 1.0 # thigh
+      - -1.5 # calf
+      # Back Left
+      - -0.1 # hip
+      - 1.0 # thigh
+      - -1.5 # calf
+      # Arm
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+state_obs:
+  dof_pos:
+    dim: 18
+  dof_vel:
+    dim: 18
+privileged_state_obs:
+  dof_pos:
+    dim: 18
+  dof_vel:
+    dim: 18
+cfg:
+  env:
+    num_privileged_obs: 104
+    num_actions: 12
+  asset:
+    name: go2ARX5_fixedarm
+tasks:
+  locomotion:
+    feet_sensor_indices:
+      - 0
+      - 1
+      - 2
+      - 3
+    z_height_range:
+    - 0.1
+    - 0.4
+constraints:
+  action_rate:
+    penalty_weight: -0.02
+    joint_names:
+      - FL_hip_joint
+      - FL_thigh_joint
+      - FL_calf_joint
+      #
+      - FR_hip_joint
+      - FR_thigh_joint
+      - FR_calf_joint
+      #
+      - RL_hip_joint
+      - RL_thigh_joint
+      - RL_calf_joint
+      #
+      - RR_hip_joint
+      - RR_thigh_joint
+      - RR_calf_joint
+  feet_drag:
+    penalty_weight: -0.01
+  energy:
+    penalty_weight: -1e-6
+  joint_limit:
+    joint_names:
+      - FL_hip_joint
+      - FL_thigh_joint
+      - FL_calf_joint
+      #
+      - FR_hip_joint
+      - FR_thigh_joint
+      - FR_calf_joint
+      #
+      - RL_hip_joint
+      - RL_thigh_joint
+      - RL_calf_joint
+      #
+      - RR_hip_joint
+      - RR_thigh_joint
+      - RR_calf_joint
+    lower:
+      data:
+        # Front Right
+        - -1.0472 # hip
+        - -1.5708 # thigh
+        - -2.7227 # calf
+        # Front Left
+        - -1.0472 # hip
+        - -1.5708 # thigh
+        - -2.7227 # calf
+        # Back Right
+        - -1.0472 # hip
+        - -0.5236 # thigh
+        - -2.7227 # calf
+        # Back Left
+        - -1.0472 # hip
+        - -0.5236 # thigh
+        - -2.7227 # calf
+    upper:
+      data:
+        # Front Right
+        - 1.0472 # hip
+        - 3.4907 # thigh
+        - -0.83776 # calf
+        # Front Left
+        - 1.0472 # hip
+        - 3.4907 # thigh
+        - -0.83776 # calf
+        # Back Right
+        - 1.0472 # hip
+        - 4.5379 # thigh
+        - -0.83776 # calf
+        # Back Left
+        - 1.0472 # hip
+        - 4.5379 # thigh
+        - -0.83776 # calf

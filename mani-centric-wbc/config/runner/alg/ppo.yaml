@@ -1,0 +1,26 @@
+defaults:
+  - actor_critic/actor: default
+  - actor_critic/critic: default
+
+device: ${..device}
+_target_: legged_gym.rsl_rl.algorithms.ppo.PPO
+value_loss_coef: 1.0
+use_clipped_value_loss: true
+clip_param: 0.2
+entropy_coef: 0.001
+num_learning_epochs: 32
+num_mini_batches: 4
+learning_rate: 0.001
+schedule: "adaptive"
+gamma: 0.9
+lam: 0.95
+desired_kl: 0.01
+max_grad_norm: 1.0
+max_lr: 1e-2
+min_lr: 0.0001
+actor_critic:
+  _target_: legged_gym.rsl_rl.modules.ActorCritic
+  num_actor_obs: ???
+  num_critic_obs: ???
+  num_actions: ???
+  init_noise_std: 1.0

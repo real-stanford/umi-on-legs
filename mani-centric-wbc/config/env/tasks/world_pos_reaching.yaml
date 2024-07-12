@@ -1,0 +1,71 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.task.ReachingLinkTask
+link_name: end_effector_tip
+pos_obs_scale: 10.0
+orn_obs_scale: 1.5
+pos_err_sigma: 0.5
+orn_err_sigma: 1.5
+pos_reward_scale: 0.0
+orn_reward_scale: 0.0
+pose_reward_scale: 4.0
+target_obs_times:
+  - 0.02
+  - 0.04
+  - 0.06
+  - 1.0
+init_pos_curriculum_level: 1
+init_orn_curriculum_level: 1
+target_relative_to_base: false
+pose_latency_warmup_steps: 0 
+# pose_latency_warmup_start: 0
+# pose_latency_warmup_steps: 500000
+pose_latency_warmup_start: 0
+pose_latency: 0.0
+pose_latency_variability: null
+# pose_latency: 0.010 # seconds
+# pose_latency_variability:
+#  - -0.005  # seconds
+#  - 0.005  # seconds
+storage_device: cpu # save GPU memory
+sequence_sampler:
+  _target_: ???
+  device: ${..storage_device}
+pos_sigma_curriculum:
+  100.0: 2.0
+  1.0: 1.0
+  0.8: 0.5
+  0.5: 0.1
+  0.4: 0.05
+  0.2: 0.01
+  0.1: 0.005
+  # 0.05: 0.001
+  # 0.04: 0.0009
+  # 0.03: 0.0008
+  # 0.02: 0.0007
+  # 0.01: 0.0006
+  # 0.009: 0.0005
+  # 0.008: 0.0004
+  # 0.007: 0.0003
+  # 0.006: 0.0002
+  # 0.005: 0.0001
+orn_sigma_curriculum:
+  100.0: 8.0
+  1.0: 4.0
+  0.8: 2.0
+  0.6: 1.00
+  0.2: 0.5
+  # 0.1: 0.1
+  # 0.09: 0.09
+  # 0.08: 0.08
+  # 0.07: 0.07
+  # 0.06: 0.06
+  # 0.05: 0.05
+  # 0.04: 0.04
+  # 0.03: 0.03
+  # 0.02: 0.02
+  # 0.01: 0.01
+smoothing_dt_multiplier: 0.25
+position_noise: 0.0
+euler_noise: 0.0
+pos_obs_clip: null
+position_obs_encoding: linear # log-direction

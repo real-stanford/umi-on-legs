@@ -1,0 +1,16 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.JointLimit
+terminate_on_violation: false
+violation_weight: 0 # for backwards consistent behavior, don't penalize joint limit violations
+violation_scale: 1.0 # only allow robot to use up to 100% of its joint range, but unused because `violation_weight == 0`
+penalty_scale: 0.9 # start penalizing at 90% of joint range
+penalty_weight: -10.0
+upper:
+  _target_: torch.tensor
+  device: ${....sim_device}
+  data: ???
+lower:
+  _target_: torch.tensor
+  device: ${....sim_device}
+  data: ???
+joint_names: null

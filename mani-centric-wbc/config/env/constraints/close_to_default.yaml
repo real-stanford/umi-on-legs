@@ -1,0 +1,8 @@
+_partial_: true
+_target_: legged_gym.env.isaacgym.constraints.StayCloseToDefaultConfig
+violation_weight: 0.0
+penalty_weight: -0.5
+terminate_on_violation: false
+default_config: ???
+joint_names: null
+power: 2
