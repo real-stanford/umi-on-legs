@@ -1,0 +1,28 @@
+{
+  "name": "wbc-real",
+  "dockerFile": "${localWorkspaceFolder}/docker/Dockerfile",
+  "build": {
+    "args": {
+      "USER_UID": "1000", // Please check your user id using `id -u` in your host machine
+      "USER_GID": "1000", // Please check your group id using `id -g` in your host machine
+    },
+  },
+  "runArgs": [
+    // Please first enable spacenavd system service through `sudo systemctl start spacenavd` or `sudo /etc/init.d/spacenavd start`
+    "--volume=/var/run/spnav.sock:/var/run/spnav.sock", // For spnav spacemouse control. 
+    "--network=host",
+    "--volume=/tmp/.X11-unix/:/tmp/.X11-unix/", // For GUI display
+    "--runtime=nvidia", // For cuda kernels (not used in wbc)
+  ],
+  "remoteEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/real/${localWorkspaceFolderBasename},type=bind",
+  "workspaceFolder": "/home/real/${localWorkspaceFolderBasename}",
+  "mounts": [
+    // We suggest using zsh for better auto-completion and history management
+    // If you do not have zsh installed, you can manually create a .zsh_history file in your home directory
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.zsh_history,target=/home/real/.zsh_history,type=bind",
+    "source=${localWorkspaceFolder}/../arx5-sdk,target=/home/real/arx5-sdk,type=bind",
+  ],
+}

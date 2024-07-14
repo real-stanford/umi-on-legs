@@ -22,7 +22,7 @@ UMI on Legs is a framework for combining real-world human demonstrations with si
 
 <br>
 
-This repository includes source code for whole-body controller simulation training, whole-body controller real-world deployment, iPhone odometry iOS application, UMI real-world environment class, and ARX5 SDK.
+This repository includes source code for whole-body controller simulation training, whole-body controller real-world deployment, iPhone odometry iOS application, UMI real-world environment class, and ARX5 SDK. #TODO: UMI is still missing
 We've published our code in a similar fashion to how we've developed it - as separate submodules - with the hope that the community can easily take any component they find useful out and plug it into their own system.
 
 If you find this codebase useful, consider citing:
@@ -35,32 +35,37 @@ If you find this codebase useful, consider citing:
 }
 ```
 
-If you have any questions, please contact [me](https://www.cs.columbia.edu/~huy/) at `huyha [at] stanford [dot] edu` or [Yihuai](https://yihuai-gao.github.io/) at `yihuai [at] stanford [dot] edu`.
+If you have any questions, please contact [Huy Ha](https://www.cs.columbia.edu/~huy/) at `huyha [at] stanford [dot] edu` or [Yihuai Gao](https://yihuai-gao.github.io/) at `yihuai [at] stanford [dot] edu`.
 
 **Table of Contents**
 
-If you just want to start running some commands while skimming the paper, you should [get started here](docs/starter.md), which downloads data, checkpoints, and rolls out the WBC.
+If you just want to start running some commands while skimming the paper, you should [get started here](mani-centric-wbc/docs/starter.md), which downloads data, checkpoints, and rolls out the WBC.
 The rest of the documentation is focused on setting up real world deployment.
  
- - 🏃‍♀️ [Getting Started](docs/starter.md)
-   - ⚙️ [Setup](docs/starter.md#setup)
-   - 📍 [Checkpoint & Data](docs/starter.md#downloads)
-   - 🕹️ [Rollout](docs/starter.md#rollout-controller)
-   - 📊 [Evaluation](docs/starter.md#evaluation)
- - 🦾 [Universal Manipulation Interface]([docs/umi/index.md](https://github.com/real-stanford/universal_manipulation_interface))
+ - 🏃‍♀️ [Getting Started](mani-centric-wbc/docs/starter.md)
+   - ⚙️ [Setup](mani-centric-wbc/docs/starter.md#setup)
+   - 📍 [Checkpoint & Data](mani-centric-wbc/docs/starter.md#downloads)
+   - 🕹️ [Rollout](mani-centric-wbc/docs/starter.md#rollout-controller)
+   - 📊 [Evaluation](mani-centric-wbc/docs/starter.md#evaluation)
+ - 🦾 [Universal Manipulation Interface]([docs/umi/index.md](https://github.com/real-stanford/universal_manipulation_interface)) #TODO: docs/umi doesn't exist? 
    - 📷 [Data Collection](https://swanky-sphere-ad1.notion.site/UMI-Data-Collection-Tutorial-4db1a1f0f2aa4a2e84d9742720428b4c?pvs=4)
    - 🛠️ [Hardware Guide](https://docs.google.com/document/d/1TPYwV9sNVPAi0ZlAupDMkXZ4CA1hsZx7YDMSmcEy6EU/edit)
    - 🎛️ [Preprocessing]([docs/umi/data.md](https://github.com/real-stanford/universal_manipulation_interface?tab=readme-ov-file#running-umi-slam-pipeline))
- - ⚙️ [Manipulation-Centric Whole-body Controller](docs/wbc.md)
-   - 🚂 [Train](docs/wbc.md#train)
-   - 🛡️ [Robustifying Sim2Real](docs/wbc.md#robustifying-sim2real)
-   - 🔭 [Extending](docs/wbc.md#extending)
-      - 🤖 [More Robots](docs/wbc.md#more-robots)
-      - 🫳 [More Manipulation Trajectories](docs/wbc.md#more-manipulation-trajectories)
- - 🌍 [Real World Deployment](docs/)
-   - 📱 [iPhone Odometry]()
-   - 🐕 [Quadruped Setup & Deployment]()
-   - 🏠 [Deployment Environment]()
+ - ⚙️ [Manipulation-Centric Whole-body Controller](mani-centric-wbc/docs/wbc.md)
+   - 🚂 [Train](mani-centric-wbc/docs/wbc.md#train)
+   - 🛡️ [Robustifying Sim2Real](mani-centric-wbc/docs/wbc.md#robustifying-sim2real)
+   - 🔭 [Extending](mani-centric-wbc/docs/wbc.md#extending)
+      - 🤖 [More Robots](mani-centric-wbc/docs/wbc.md#more-robots)
+      - 🫳 [More Manipulation Trajectories](mani-centric-wbc/docs/wbc.md#more-manipulation-trajectories)
+ - 🌍 [Real World Deployment](real-wbc/docs/)
+   - 🤖 [Reflections on Hardware Choices](real-wbc/docs/hardware_design_choices.md) # TODO: add emojis
+   - 📝 [Bill of Materials](real-wbc/docs/bill_of_materials.md)
+   - 🦾 [ARX5 Robot Arm SDK](https://github.com/yihuai-gao/arx5-sdk)
+   - 📱 [iPhone Odometry](https://github.com/yihuai-gao/iPhoneVIO)
+   - 🖨️ [3D Printing Guide](real-wbc/docs/3d_printing.md)
+   - 🛠️ [Assembly Guide](real-wbc/docs/assembly.md)
+   - 🛜 [Unitree Robots Network Setup](real-wbc/docs/network.md)
+   - 🐕 [Deploy WBC on Real Robots](real-wbc/docs/codebase_setup.md)
  - 📽️ [Visualizations](docs/visualization.md)
  
 
@@ -78,3 +83,6 @@ The rest of the documentation is focused on setting up real world deployment.
 
 **UMI Environment Class**:
  - Our UMI deployment codebase heavily builds upon the original [UMI codebase](https://github.com/real-stanford/universal_manipulation_interface). Big thanks to the [UMI team](https://umi-gripper.github.io/)!
+
+**OptiTrack Motion Capture Setup**:
+ - Thanks to [Jingyun Yang](https://yjy0625.github.io/) and [Zi-ang Cao](https://github.com/Zi-ang-Cao) for providing the OptiTrack motion capture code and helping us to set it up!
