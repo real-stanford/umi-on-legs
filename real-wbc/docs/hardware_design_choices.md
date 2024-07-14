@@ -1,6 +1,7 @@
 # Hardware Design Choices
 
-During the development of our hardware system, we encountered many unexpected twist and turns. Here we summarize a few reflections that can be helpful for the community to build similar dog-with-arm robot systems.
+During the development of our hardware system, we encountered many unexpected twist and turns. 
+Here, we reflect on our hardware system, with the hope that it can help others in making hardware/systems design choices in building a quadruped manipulator system.
 
 1. Is Go2 a good choice for the base?
 2. Is ARX5 a good choice for the arm? 
@@ -49,5 +50,5 @@ GoPro with a fish-eye lense is a great solution to simultaneously record videos 
 - It is hard for beginners (who is not familiar with this system yet) to collect high quality data for robots to replay. This is due to the kinematic and dynamic infeasibility of robot hardware and controllers. It would be nice if the device can provide instructions and feedback during the data collection time, instead of after running the entire SLAM pipeline and deploying it on the robot.
 - When deploying the trained policy to the real-world robot, GoPro image output has to go through a capture card before connecting to PC. This usually introduces ~100ms latency and may not be optimal for reactive tasks.
 
-In general, we are very positive to such lightweight data collection devices and we are looking forward to more improvements in the future.
+In general, we are very optimistic about lightweight data collection devices and we are looking forward to more improvements in the future.
 

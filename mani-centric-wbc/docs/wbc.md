@@ -4,7 +4,7 @@
 
 To launch WBC training, you'll need to at least specify which device to train and simulate on, as well as the path to the trajectory pickle file
 ```sh
-python scripts/train.py env.sim_device=cuda:0 env.graphics_device_id=0 env.tasks.reaching.sequence_sampler.file_path=wbc/data/tossing.pkl
+python scripts/train.py env.sim_device=cuda:0 env.graphics_device_id=0 env.tasks.reaching.sequence_sampler.file_path=data/tossing.pkl
 ```
 
 If you are familiar with [Hydra](https://hydra.cc/), the config library, then you'll quickly be able to navigate the `config/` directory and find all hyperparameters you need.
@@ -12,7 +12,7 @@ However, incase you aren't, here are relevant hyperparameters for tuning a typic
 For each of these hyperparameters, you can just append them to the command. 
 For instance, to override how many learning iterations training goes on for
 ```sh
-python scripts/train.py env.sim_device=cuda:0 env.graphics_device_id=0 env.tasks.reaching.sequence_sampler.file_path=wbc/data/tossing.pkl runner.max_iterations=42
+python scripts/train.py env.sim_device=cuda:0 env.graphics_device_id=0 env.tasks.reaching.sequence_sampler.file_path=data/tossing.pkl runner.max_iterations=42
 ```
 
 [](#robustifying-sim2real)
@@ -32,6 +32,10 @@ python scripts/train.py env.sim_device=cuda:0 env.graphics_device_id=0 env.tasks
 - `env.attach_camera`: is a boolean flag, which, when set to false, will disable rendering and allow training to be ran on a headless server that doesn't have fake displays set up yet. When `env.attach_camera=false`, make sure to set `env.graphics_device_id=-1` as well.
 - `env.cfg.terrain.mode`: sets whether the robot will be trained on a flat `plane` or with a `perlin` random noise terrain. In UMI on Legs, we found that training with `env.cfg.terrain.mode=plane` was sufficient for our use case.
 - `env.constraints.action_rate.penalty_weight`: sets how much weight the action rate penalty plays in the total reward. This is the hyperparameter we tune the most to get the behavior we want. You can set the penalty weight of all other constraints listed in the `combo_*` training files. For instance, in our default training config `combo_go2ARX5_pickle_reaching_extreme.yaml`, we inherit constraints for `action_rate`, `joint_acc`, `collision` `joint_limit`, `torque`, `even_mass_distribution`, `feet_under_hips`, `aligned_body_ee`, and `root_height` from `combo_go2ARX5_pickle_reaching.yaml`. You can set the penalty weight of any of those with `env.constraints.{}.penalty_weight` where `{}` is the constraint name.
+- `env.tasks.reaching.target_obs_times`: is a list of floats, which sets the relative timing offsets for the target poses fed into the controller.
+For instance, `[0.0, 0.02, 0.04, 0.06]` would allow the controller to observe the current target pose, along with 3 more into the future, 20ms apart.
+In many of our checkpoints, we use `[0.02, 0.04, 0.06, 1.00]` which gives instantaneous velocity and acceleration information as well information far into the future.
+Giving more targets in the past or future doesn't change the behavior much.
 
 ## Robustifying Sim2Real
 

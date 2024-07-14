@@ -8,7 +8,7 @@ $^1$ Stanford University, $^2$ Columbia University, $^3$ Google DeepMind, $^🐶
 [Project Page](https://umi-on-legs.github.io/) | [Arxiv](https://arxiv.org/abs/2307.14535) | [Video](https://www.cs.columbia.edu/~huy/scalingup/static/videos/scalingup.mp4)
 
 <div style="margin:50px; text-align: justify;">
-<img style="width:100%;" src="docs/assets/umi_on_legs_toss.gif">
+<img style="width:100%;" src="mani-centric-wbc/docs/assets/umi_on_legs_toss.gif">
 
 
 UMI on Legs is a framework for combining real-world human demonstrations with simulation trained whole-body controllers, providing a scalable approach for manipulation skills on robot dogs with arms.
@@ -48,8 +48,7 @@ The rest of the documentation is focused on setting up real world deployment.
    - 📍 [Checkpoint & Data](mani-centric-wbc/docs/starter.md#downloads)
    - 🕹️ [Rollout](mani-centric-wbc/docs/starter.md#rollout-controller)
    - 📊 [Evaluation](mani-centric-wbc/docs/starter.md#evaluation)
- - 🦾 [Universal Manipulation Interface]([docs/umi/index.md](https://github.com/real-stanford/universal_manipulation_interface)) 
- <!-- TODO: docs/umi doesn't exist?  -->
+ - 🦾 [Universal Manipulation Interface](https://github.com/real-stanford/universal_manipulation_interface)
    - 📷 [Data Collection](https://swanky-sphere-ad1.notion.site/UMI-Data-Collection-Tutorial-4db1a1f0f2aa4a2e84d9742720428b4c?pvs=4)
    - 🛠️ [Hardware Guide](https://docs.google.com/document/d/1TPYwV9sNVPAi0ZlAupDMkXZ4CA1hsZx7YDMSmcEy6EU/edit)
    - 🎛️ [Preprocessing]([docs/umi/data.md](https://github.com/real-stanford/universal_manipulation_interface?tab=readme-ov-file#running-umi-slam-pipeline))
@@ -60,7 +59,7 @@ The rest of the documentation is focused on setting up real world deployment.
       - 🤖 [More Robots](mani-centric-wbc/docs/wbc.md#more-robots)
       - 🫳 [More Manipulation Trajectories](mani-centric-wbc/docs/wbc.md#more-manipulation-trajectories)
  - 🌍 [Real World Deployment](real-wbc/docs/)
-   - 🤖 [Reflections on Hardware Choices](real-wbc/docs/hardware_design_choices.md)
+   - 🤔 [Reflections on Hardware Choices](real-wbc/docs/hardware_design_choices.md)
    - 📝 [Bill of Materials](real-wbc/docs/bill_of_materials.md)
    - 🦾 [ARX5 Robot Arm SDK](https://github.com/yihuai-gao/arx5-sdk)
    - 📱 [iPhone Odometry](https://github.com/yihuai-gao/iPhoneVIO)
