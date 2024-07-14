@@ -1,0 +1,6 @@
+[submodule "arx5-sdk"]
+	path = arx5-sdk
+	url = https://github.com/yihuai-gao/arx5-sdk.git
+[submodule "iPhoneVIO"]
+	path = iPhoneVIO
+	url = https://github.com/yihuai-gao/iPhoneVIO.git

@@ -22,8 +22,9 @@ UMI on Legs is a framework for combining real-world human demonstrations with si
 
 <br>
 
-This repository includes source code for whole-body controller simulation training, whole-body controller real-world deployment, iPhone odometry iOS application, UMI real-world environment class, and ARX5 SDK. #TODO: UMI is still missing
+This repository includes source code for whole-body controller simulation training, whole-body controller real-world deployment, iPhone odometry iOS application, UMI real-world environment class, and ARX5 SDK. 
 We've published our code in a similar fashion to how we've developed it - as separate submodules - with the hope that the community can easily take any component they find useful out and plug it into their own system.
+<!-- TODO: we don't have UMI code yet. Shall we say it here? -->
 
 If you find this codebase useful, consider citing:
 
@@ -47,7 +48,8 @@ The rest of the documentation is focused on setting up real world deployment.
    - 📍 [Checkpoint & Data](mani-centric-wbc/docs/starter.md#downloads)
    - 🕹️ [Rollout](mani-centric-wbc/docs/starter.md#rollout-controller)
    - 📊 [Evaluation](mani-centric-wbc/docs/starter.md#evaluation)
- - 🦾 [Universal Manipulation Interface]([docs/umi/index.md](https://github.com/real-stanford/universal_manipulation_interface)) #TODO: docs/umi doesn't exist? 
+ - 🦾 [Universal Manipulation Interface]([docs/umi/index.md](https://github.com/real-stanford/universal_manipulation_interface)) 
+ <!-- TODO: docs/umi doesn't exist?  -->
    - 📷 [Data Collection](https://swanky-sphere-ad1.notion.site/UMI-Data-Collection-Tutorial-4db1a1f0f2aa4a2e84d9742720428b4c?pvs=4)
    - 🛠️ [Hardware Guide](https://docs.google.com/document/d/1TPYwV9sNVPAi0ZlAupDMkXZ4CA1hsZx7YDMSmcEy6EU/edit)
    - 🎛️ [Preprocessing]([docs/umi/data.md](https://github.com/real-stanford/universal_manipulation_interface?tab=readme-ov-file#running-umi-slam-pipeline))
@@ -58,7 +60,7 @@ The rest of the documentation is focused on setting up real world deployment.
       - 🤖 [More Robots](mani-centric-wbc/docs/wbc.md#more-robots)
       - 🫳 [More Manipulation Trajectories](mani-centric-wbc/docs/wbc.md#more-manipulation-trajectories)
  - 🌍 [Real World Deployment](real-wbc/docs/)
-   - 🤖 [Reflections on Hardware Choices](real-wbc/docs/hardware_design_choices.md) # TODO: add emojis
+   - 🤖 [Reflections on Hardware Choices](real-wbc/docs/hardware_design_choices.md)
    - 📝 [Bill of Materials](real-wbc/docs/bill_of_materials.md)
    - 🦾 [ARX5 Robot Arm SDK](https://github.com/yihuai-gao/arx5-sdk)
    - 📱 [iPhone Odometry](https://github.com/yihuai-gao/iPhoneVIO)
