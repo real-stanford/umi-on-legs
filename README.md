@@ -48,6 +48,7 @@ The rest of the documentation is focused on setting up real world deployment.
    - 📍 [Checkpoint & Data](mani-centric-wbc/docs/starter.md#downloads)
    - 🕹️ [Rollout](mani-centric-wbc/docs/starter.md#rollout-controller)
    - 📊 [Evaluation](mani-centric-wbc/docs/starter.md#evaluation)
+   - 📈 [Curves](https://api.wandb.ai/links/columbia-ai-robotics/rrudtifq)
  - 🦾 [Universal Manipulation Interface](https://github.com/real-stanford/universal_manipulation_interface)
    - 📷 [Data Collection](https://swanky-sphere-ad1.notion.site/UMI-Data-Collection-Tutorial-4db1a1f0f2aa4a2e84d9742720428b4c?pvs=4)
    - 🛠️ [Hardware Guide](https://docs.google.com/document/d/1TPYwV9sNVPAi0ZlAupDMkXZ4CA1hsZx7YDMSmcEy6EU/edit)

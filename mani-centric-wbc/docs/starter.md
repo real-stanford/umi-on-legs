@@ -66,6 +66,10 @@ The summary that gets printed out at the end by weights and biases gives the met
  - `eval/time_outs/sum` gives the proxy for survival rate. If the robot didn't terminate midway through the episode, then the episode should have timed out.
  - `eval/constraint/energy/sum_electrical_power/mean` gives the average power usage in Watts.
 
+> 📈 Training Curves & Evaluation Logs
+>
+> Please find the training and evaluation runs in [this report](https://api.wandb.ai/links/columbia-ai-robotics/rrudtifq).
+
 To evaluate the no-preview baseline in simulation
 ```sh
 python scripts/evaluate.py env.sim_device=cuda:0 env.graphics_device_id=0 env.cfg.env.episode_length_s=17.0 env.tasks.reaching.sequence_sampler.file_path=data/tossing.pkl ckpt_path=checkpoints/tossing/no-preview/model.pt env.tasks.reaching.target_obs_times="[0.0]"
