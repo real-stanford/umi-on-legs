@@ -5,7 +5,7 @@
 
 $^1$ Stanford University, $^2$ Columbia University, $^3$ Google DeepMind, $^🐶$ Equal Contribution
 
-[Project Page](https://umi-on-legs.github.io/) | [Arxiv](https://arxiv.org/abs/2307.14535) | [Video](https://www.cs.columbia.edu/~huy/scalingup/static/videos/scalingup.mp4)
+[Project Page](https://umi-on-legs.github.io/) | [Arxiv](https://arxiv.org/abs/2407.10353) | [Video](https://www.youtube.com/watch?v=4Bp0q3xHTxE)
 
 <div style="margin:50px; text-align: justify;">
 <img style="width:100%;" src="mani-centric-wbc/docs/assets/umi_on_legs_toss.gif">
@@ -68,7 +68,7 @@ The rest of the documentation is focused on setting up real world deployment.
    - 🛠️ [Assembly Guide](real-wbc/docs/assembly.md)
    - 🛜 [Unitree Robots Network Setup](real-wbc/docs/network.md)
    - 🐕 [Deploy WBC on Real Robots](real-wbc/docs/codebase_setup.md)
- - 📽️ [Visualizations](docs/visualization.md)
+ - 📽️ [Visualizations](mani-centric-wbc/docs/visualization.md)
  
 
 # Code Acknowledgements
